@@ -34,13 +34,6 @@
   resolved "https://registry.nlark.com/@tsconfig/node16/download/@tsconfig/node16-1.0.2.tgz#423c77877d0569db20e1fc80885ac4118314010e"
   integrity sha1-Qjx3h30Fadsg4fyAiFrEEYMUAQ4=
 
-"@types/node-fetch@^3.0.3":
-  version "3.0.3"
-  resolved "https://registry.nlark.com/@types/node-fetch/download/@types/node-fetch-3.0.3.tgz?cache=0&sync_timestamp=1630688520171&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40types%2Fnode-fetch%2Fdownload%2F%40types%2Fnode-fetch-3.0.3.tgz#9d969c9a748e841554a40ee435d26e53fa3ee899"
-  integrity sha1-nZacmnSOhBVUpA7kNdJuU/o+6Jk=
-  dependencies:
-    node-fetch "*"
-
 "@types/node@^17.0.2":
   version "17.0.2"
   resolved "https://registry.npmmirror.com/@types/node/download/@types/node-17.0.2.tgz#a4c07d47ff737e8ee7e586fe636ff0e1ddff070a"
@@ -65,11 +58,6 @@ create-require@^1.1.0:
   version "1.1.1"
   resolved "https://registry.npm.taobao.org/create-require/download/create-require-1.1.1.tgz#c1d7e8f1e5f6cfc9ff65f9cd352d37348756c333"
   integrity sha1-wdfo8eX2z8n/ZfnNNS03NIdWwzM=
-
-data-uri-to-buffer@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.npmmirror.com/data-uri-to-buffer/download/data-uri-to-buffer-4.0.0.tgz?cache=0&sync_timestamp=1632737517013&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fdata-uri-to-buffer%2Fdownload%2Fdata-uri-to-buffer-4.0.0.tgz#b5db46aea50f6176428ac05b73be39a57701a64b"
-  integrity sha1-tdtGrqUPYXZCisBbc745pXcBpks=
 
 diff@^4.0.1:
   version "4.0.2"
@@ -116,20 +104,6 @@ entities@^3.0.1:
   resolved "https://registry.nlark.com/entities/download/entities-3.0.1.tgz#2b887ca62585e96db3903482d336c1006c3001d4"
   integrity sha1-K4h8piWF6W2zkDSC0zbBAGwwAdQ=
 
-fetch-blob@^3.1.2:
-  version "3.1.3"
-  resolved "https://registry.npmmirror.com/fetch-blob/download/fetch-blob-3.1.3.tgz#a7dca4855e39d3e3c5a1da62d4ee335c37d26012"
-  integrity sha512-ax1Y5I9w+9+JiM+wdHkhBoxew+zG4AJ2SvAD1v1szpddUIiPERVGBxrMcB2ZqW0Y3PP8bOWYv2zqQq1Jp2kqUQ==
-  dependencies:
-    web-streams-polyfill "^3.0.3"
-
-formdata-polyfill@^4.0.10:
-  version "4.0.10"
-  resolved "https://registry.npmmirror.com/formdata-polyfill/download/formdata-polyfill-4.0.10.tgz#24807c31c9d402e002ab3d8c720144ceb8848423"
-  integrity sha1-JIB8McnUAuACqz2McgFEzriEhCM=
-  dependencies:
-    fetch-blob "^3.1.2"
-
 htmlparser2@^7.2.0:
   version "7.2.0"
   resolved "https://registry.npmmirror.com/htmlparser2/download/htmlparser2-7.2.0.tgz?cache=0&sync_timestamp=1636640853072&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fhtmlparser2%2Fdownload%2Fhtmlparser2-7.2.0.tgz#8817cdea38bbc324392a90b1990908e81a65f5a5"
@@ -144,15 +118,6 @@ make-error@^1.1.1:
   version "1.3.6"
   resolved "https://registry.npm.taobao.org/make-error/download/make-error-1.3.6.tgz#2eb2e37ea9b67c4891f684a1394799af484cf7a2"
   integrity sha1-LrLjfqm2fEiR9oShOUeZr0hM96I=
-
-node-fetch@*:
-  version "3.1.0"
-  resolved "https://registry.npmmirror.com/node-fetch/download/node-fetch-3.1.0.tgz#714f4922dc270239487654eaeeab86b8206cb52e"
-  integrity sha512-QU0WbIfMUjd5+MUzQOYhenAazakV7Irh1SGkWCsRzBwvm4fAhzEUaHMJ6QLP7gWT6WO9/oH2zhKMMGMuIrDyKw==
-  dependencies:
-    data-uri-to-buffer "^4.0.0"
-    fetch-blob "^3.1.2"
-    formdata-polyfill "^4.0.10"
 
 node-fetch@^2.6.6:
   version "2.6.6"
@@ -188,11 +153,6 @@ typescript@^4.5.4:
   version "4.5.4"
   resolved "https://registry.npmmirror.com/typescript/download/typescript-4.5.4.tgz#a17d3a0263bf5c8723b9c52f43c5084edf13c2e8"
   integrity sha512-VgYs2A2QIRuGphtzFV7aQJduJ2gyfTljngLzjpfW9FoYZF6xuw1W0vW9ghCKLfcWrCFxK81CSGRAvS1pn4fIUg==
-
-web-streams-polyfill@^3.0.3:
-  version "3.2.0"
-  resolved "https://registry.npmmirror.com/web-streams-polyfill/download/web-streams-polyfill-3.2.0.tgz?cache=0&sync_timestamp=1636211225188&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fweb-streams-polyfill%2Fdownload%2Fweb-streams-polyfill-3.2.0.tgz#a6b74026b38e4885869fb5c589e90b95ccfc7965"
-  integrity sha1-prdAJrOOSIWGn7XFiekLlcz8eWU=
 
 webidl-conversions@^3.0.0:
   version "3.0.1"
