@@ -1,18 +1,23 @@
+import Asset from "./Asset";
+import { Parser } from "htmlparser2";
 import fs from "fs";
 import path from "path";
+import rimraf from 'rimraf';
 import url from "url";
 
-import { Parser } from "htmlparser2";
-
-import Asset from "./Asset";
+const assetSet = new Set<string>();
 
 Asset.onError = (asset, err) => {
     console.error(`FAIL: ${asset.src}`, err);
-    asset.download();
+    asset.download(true).catch(() => {});
 };
 
 Asset.onAsset = retryWrap(async (asset, buf) => {
     const { src } = asset;
+    if (assetSet.has(src)) {
+        return;
+    }
+    assetSet.add(src);
     const urlObj = new URL(src);
     const filename = path.resolve(
         __dirname,
@@ -42,7 +47,7 @@ Asset.onAsset = retryWrap(async (asset, buf) => {
                         case "img":
                             {
                                 if (!attrs.src) {
-                                    break;
+                                    return;
                                 }
                                 const resolved = url.resolve(src, attrs.src);
                                 if (/gamemath\.com/.test(resolved)) {
@@ -51,12 +56,17 @@ Asset.onAsset = retryWrap(async (asset, buf) => {
                             }
                             break;
                         case "link":
+                        case "a":
                             {
-                                if (!attrs.href) {
-                                    break;
+                                if (
+                                    !attrs.href
+                                ) {
+                                    return;
                                 }
+
                                 const resolved = url.resolve(src, attrs.href);
-                                if (/gamemath\.com/.test(resolved)) {
+
+                                if (/gamemath\.com/.test(resolved) && !resolved.includes('.html')) {
                                     arr.push(resolved);
                                 }
                             }
@@ -73,9 +83,7 @@ Asset.onAsset = retryWrap(async (asset, buf) => {
     console.info(`SUCCESS: ${src}`)
 });
 
-if (fs.existsSync(path.join(__dirname, "../website"))) {
-    fs.unlinkSync(path.join(__dirname, "../website"));
-}
+rimraf.sync(path.join(__dirname, "../website"));
 
 const pages = removeDuplicatePage(
     fs.readFileSync(path.resolve(__dirname, "../PAGES")).toString().split("\n").filter(Boolean)

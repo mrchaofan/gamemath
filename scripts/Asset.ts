@@ -1,4 +1,9 @@
+import Locksmith from "./Locksmith";
 import fetch from "node-fetch";
+
+const lock = new Locksmith(8);
+
+(global as any).lock = lock;
 
 export default class Asset {
     private static assets: Map<string, Asset> = new Map();
@@ -10,26 +15,32 @@ export default class Asset {
             return;
         }
         asset = new Asset(src);
-        asset.download();
+        asset.download().catch(() => {});
     }
     private downloadPromise: Promise<Buffer> | null = null;
     private constructor(public readonly src: string) { }
-    public download() {
-        if (this.downloadPromise) {
+    public async download(force?: boolean): Promise<Buffer> {
+        if (!force && this.downloadPromise) {
             return this.downloadPromise;
         }
-        this.downloadPromise = Promise.race([
-            fetch(this.src, {})
-                .then(res => res.arrayBuffer())
-                .then(buf => Buffer.from(buf)),
-            timeout(6000),
-        ]) as Promise<Buffer>;
+        const l = lock.lock();
+        await l;
+        const controller = new AbortController();
+        this.downloadPromise = fetch(this.src, {
+            signal: controller.signal,
+        })
+            .then((res) => res.arrayBuffer())
+            .then((buf) => Buffer.from(buf));
+        timeout(10000).then(() => {
+            controller.abort();
+        })
         this.downloadPromise.then(
             buf => {
+                lock.release(l);
                 Asset.onAsset?.(this, buf);
             },
             err => {
-                this.downloadPromise = null;
+                lock.release(l);
                 Asset.onError?.(this, err);
             }
         );
@@ -38,9 +49,9 @@ export default class Asset {
 }
 
 function timeout(t: number) {
-    return new Promise((_, r) => {
+    return new Promise<void>((f) => {
         setTimeout(() => {
-            r(new Error("timeout"));
+            f();
         }, t);
     });
 }
